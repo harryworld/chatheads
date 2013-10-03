@@ -21,6 +21,8 @@ typedef enum {
 
 @property (nonatomic) CHSnappingEdge snappingEdge;
 @property (nonatomic, weak) id<CHDraggingCoordinatorDelegate> delegate;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *statusLabel;
 
 - (id)initWithWindow:(UIWindow *)window draggableViewBounds:(CGRect)bounds;
 
