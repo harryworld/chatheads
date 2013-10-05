@@ -7,9 +7,11 @@
 //
 
 #import "CHDraggableView.h"
+#import "CHAvatarView.h"
 
 @interface CHDraggableView (Avatar)
 
 + (id)draggableViewWithImage:(UIImage *)image;
++ (id)draggableViewWithImageView:(CHAvatarView *)avatarView;
 
 @end

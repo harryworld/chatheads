@@ -8,8 +8,6 @@
 
 #import "CHDraggableView+Avatar.h"
 
-#import "CHAvatarView.h"
-
 @implementation CHDraggableView (Avatar)
 
 + (id)draggableViewWithImage:(UIImage *)image
@@ -19,6 +17,18 @@
     CHAvatarView *avatarView = [[CHAvatarView alloc] initWithFrame:CGRectInset(view.bounds, 4, 4)];
     avatarView.backgroundColor = [UIColor clearColor];
     [avatarView setImage:image];
+    avatarView.center = CGPointMake(CGRectGetMidX(view.bounds), CGRectGetMidY(view.bounds));
+    [view addSubview:avatarView];
+    
+    return view;
+}
+
++ (id)draggableViewWithImageView:(CHAvatarView *)avatarView
+{
+    CHDraggableView *view = [[CHDraggableView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
+    
+    avatarView.frame = CGRectInset(view.bounds, 4, 4);
+    avatarView.backgroundColor = [UIColor clearColor];
     avatarView.center = CGPointMake(CGRectGetMidX(view.bounds), CGRectGetMidY(view.bounds));
     [view addSubview:avatarView];
     
