@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CHDraggableView.h"
 
+#import "XPConnection.h"
+
 typedef enum {
     CHInteractionStateNormal,
     CHInteractionStateConversation
@@ -156,7 +158,9 @@ typedef enum {
 - (void)draggableViewNeedsAlignment:(CHDraggableView *)view
 {
     NSLog(@"Align view");
-    [self _animateViewToEdges:view];
+    if (_state == CHInteractionStateNormal) {
+        [self _animateViewToEdges:view];
+    }
 }
 
 #pragma mark Dragging Helper
@@ -233,8 +237,10 @@ typedef enum {
     _backgroundView.alpha = 0.0f;
     [self.window insertSubview:_backgroundView belowSubview:_presentedNavigationController.view];
     
+    XPConnection *connection = [XPConnection sharedInstance];
+    
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, 160, 20)];
-    _nameLabel.text = @"客服";
+    _nameLabel.text = connection.staffName;
     _nameLabel.backgroundColor = [UIColor clearColor];
     _nameLabel.font = [UIFont boldSystemFontOfSize:16];
     _nameLabel.shadowOffset = CGSizeMake(0, 1);
@@ -243,7 +249,7 @@ typedef enum {
     [self.window insertSubview:_nameLabel aboveSubview:_presentedNavigationController.view];
     
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 160, 20)];
-    _statusLabel.text = @"";
+    _statusLabel.text = connection.staffStatus;
     _statusLabel.backgroundColor = [UIColor clearColor];
     _statusLabel.font = [UIFont boldSystemFontOfSize:16];
     _statusLabel.shadowOffset = CGSizeMake(0, 1);
